@@ -16,6 +16,23 @@ from pybricks.parameters import Port
 from pybricks.tools import wait
 from pybricks.robotics import DriveBase
 
+def sayVals(name, val):
+    print(name + val)
+    
+def switcher(value):
+    if (value > -1):
+        wait(10)
+        print("ik zie wit")
+    elif(value < -31 and value > -39):
+        wait(10)
+        print("links")
+    elif(value < -41):
+        wait(10)
+        print("ik zie zwart")
+        
+def printRGB(obj):
+    return obj.rgb()
+
 # Initialize the motors.
 left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
@@ -32,8 +49,8 @@ WHITE = 85
 threshold = (BLACK + WHITE) / 2
 
 # Set the drive speed at 100 millimeters per second.
-DRIVE_SPEED = 30
-TURN_SPEED = 15
+DRIVE_SPEED = 100
+TURN_SPEED = 30
 
 # Set the gain of the proportional line controller. This means that for every
 # percentage point of light deviating from the threshold, we set the turn
@@ -41,18 +58,19 @@ TURN_SPEED = 15
 
 # For example, if the light value deviates from the threshold by 10, the robot
 # steers at 10*1.2 = 12 degrees per second.
-PROPORTIONAL_GAIN = 1.2
+PROPORTIONAL_GAIN = 1.5
 
 # Start following the line endlessly.
 while True:
     # Calculate the deviation from the threshold.
     deviation = line_sensor.reflection() - threshold
-
+    print(printRGB(line_sensor))
+    # switcher(deviation)
     # Calculate the turn rate.
     turn_rate = PROPORTIONAL_GAIN * deviation
-    
+    # switcher(turn_rate)
     # Set the drive base speed and turn rate.
-    robot.drive(, turn_rate)
+    robot.drive(TURN_SPEED, turn_rate)
 
     # You can wait for a short time or do other things in this loop.
-    wait(10)
+    wait(10)   
