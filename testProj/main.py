@@ -44,13 +44,13 @@ line_sensor = ColorSensor(Port.S3)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
 # Calculate the light threshold. Choose values based on your measurements.
-BLACK = 9
-WHITE = 85
+BLACK = 8
+WHITE = 9
 threshold = (BLACK + WHITE) / 2
 
 # Set the drive speed at 100 millimeters per second.
 DRIVE_SPEED = 100
-TURN_SPEED = 30
+# TURN_SPEED = 30
 
 # Set the gain of the proportional line controller. This means that for every
 # percentage point of light deviating from the threshold, we set the turn
@@ -58,19 +58,18 @@ TURN_SPEED = 30
 
 # For example, if the light value deviates from the threshold by 10, the robot
 # steers at 10*1.2 = 12 degrees per second.
-PROPORTIONAL_GAIN = 1.5
+PROPORTIONAL_GAIN = 0.75
 
 # Start following the line endlessly.
 while True:
     # Calculate the deviation from the threshold.
+    print(line_sensor.reflection())
     deviation = line_sensor.reflection() - threshold
-    print(printRGB(line_sensor))
-    # switcher(deviation)
+    # print(printRGB(line_sensor))
     # Calculate the turn rate.
     turn_rate = PROPORTIONAL_GAIN * deviation
-    # switcher(turn_rate)
     # Set the drive base speed and turn rate.
-    robot.drive(TURN_SPEED, turn_rate)
+    robot.drive(DRIVE_SPEED, turn_rate)
 
     # You can wait for a short time or do other things in this loop.
     wait(10)   
