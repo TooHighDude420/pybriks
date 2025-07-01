@@ -12,16 +12,15 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 # Click "Open user guide" on the EV3 extension tab for more information.
 
 # Initialize the motors.
+arm = Motor(Port.A)
 left_motor = Motor(Port.B)
 right_motor = Motor(Port.C)
 
 # Initialize the sensors.
-# sonic_sensor = UltrasonicSensor(Port.S1)
-# gyro = GyroSensor(Port.S2)
+sonic_sensor = UltrasonicSensor(Port.S1)
+gyro = GyroSensor(Port.S2) 
 
 # Initialize the drive base.
-# robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
+robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
-# while True:
-#     dis = sonic_sensor.distance()
-#     print(dis)
+# Rest van code gaat hier
